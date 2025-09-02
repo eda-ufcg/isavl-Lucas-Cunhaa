@@ -8,16 +8,27 @@ public class BST {
     private int size;
 
     public boolean isAVL() {
-        //TODO: implementar
-        return false;
+
+        return true;
+    }
+
+    private boolean isAVL(Node node) {
+        if(node == null) return true;
+
+        return Math.abs(balance(node)) <= 1;
+
+        isAVL(node.left);
+        isAVL(node.right);
     }
 
     /**
      * Retorna a altura da árvore.
      */
     public int height() {
+        if(root == null) return -1;
+
+        return height(root);
         //TODO implementar
-        return -1;
     }
 
     /**
@@ -25,11 +36,15 @@ public class BST {
      * para recursão e para o balance.
      */
     private int height(Node node) {
-        return -1;
+        if(node.isLeaf()) return 0;
+        if(node.hasOnlyLeftChild()) return 1 + height(node.left);
+        if(node.hasOnlyRightChild()) return 1 + height(node.right);
+
+        return 1 + Math.max(height(node.left), height(node.right));
     }
 
     private int balance(Node node) {
-        return -1;
+        return height(node.right) - height(node.left);
     }
 
     /**
